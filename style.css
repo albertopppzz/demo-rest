@@ -1,76 +1,33 @@
-/* 1. Configuración de Base */
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+.font-serif { font-family: 'Playfair Display', serif; }
+nav { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-body {
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* 2. Tipografías */
-.font-serif {
-    font-family: 'Playfair Display', serif;
-}
-
-/* 3. Transición del Navbar */
-nav {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 4. Efecto de Hover en Imágenes (Efecto Hostinger) */
-.group img {
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.group:hover img {
-    transform: scale(1.1);
-}
-
-/* 5. Estilo personalizado para el botón de Idioma */
-#lang-toggle {
-    cursor: pointer;
+/* Botones de Redes Sociales */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
     transition: all 0.3s ease;
 }
 
-#lang-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
+.social-icon:hover {
+    background: #ea580c;
+    border-color: #ea580c;
+    transform: translateY(-3px);
 }
 
-/* 6. Animación suave para el cambio de textos (Multi-idioma) */
-[data-i18n] {
-    transition: opacity 0.3s ease;
-}
+/* Efecto hover imágenes */
+img { transition: transform 0.6s ease; }
+.grid div:hover img { transform: scale(1.05); }
 
-/* 7. Footer con degradado sutil */
-footer {
-    background: linear-gradient(to bottom, #1c1917, #0c0a09);
-}
-
-/* 8. Ajuste para dispositivos móviles */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 3.5rem; /* Ajusta el título en celulares */
-        line-height: 1.1;
-    }
-}
-
-/* 9. Scrollbar personalizada (Estilo Moderno) */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f5f5f4;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #ea580c; /* Color naranja de la marca */
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #c2410c;
-}
+/* Scrollbar Personalizada */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #ea580c; border-radius: 10px; }
