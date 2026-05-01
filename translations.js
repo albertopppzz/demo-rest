@@ -1,11 +1,12 @@
 const i18n = {
     es: {
         nav_menu: "Menú",
-        nav_reserve: "Reservar",
+        nav_location: "Ubicación",
+        nav_back: "← Inicio",
         hero_title: "Sabor Italiano en Cozumel",
         hero_subtitle: "Pasta artesanal frente al Caribe. La mejor experiencia gastronómica de la isla.",
         btn_explore: "Ver Menú",
-        spec_title: "Especialidades de la Casa",
+        spec_title: "Especialidades",
         plate_1: "Fettuccine al Pesto",
         desc_1: "Pasta fresca hecha en casa con albahaca orgánica y piñones tostados.",
         plate_2: "Pizza Margherita",
@@ -13,24 +14,29 @@ const i18n = {
         plate_3: "Tiramisú Real",
         desc_3: "Receta tradicional con café espresso y mascarpone importado.",
         location_title: "Ubicación",
-        address: "Av. Rafael E. Melgar, Centro, Cozumel, Q.R.",
-        footer_text: "El restaurante italiano más auténtico de Cozumel."
+        menu_title: "Il Menu",
+        menu_subtitle: "Auténtica Cocina Toscana",
+        cat_pasta: "Le Paste",
+        cat_pizza: "Pizze Gourmet"
     },
     en: {
         nav_menu: "Menu",
-        nav_reserve: "Book a Table",
+        nav_location: "Location",
+        nav_back: "← Home",
         hero_title: "Italian Flavor in Cozumel",
         hero_subtitle: "Handmade pasta by the Caribbean. The island's finest dining experience.",
         btn_explore: "View Menu",
-        spec_title: "Chef's Specials",
+        spec_title: "Our Specials",
         plate_1: "Pesto Fettuccine",
         desc_1: "Homemade fresh pasta with organic basil and toasted pine nuts.",
         plate_2: "Margherita Pizza",
         desc_2: "San Marzano tomatoes and fresh mozzarella from our stone oven.",
         plate_3: "Royal Tiramisu",
         desc_3: "Traditional recipe with espresso coffee and imported mascarpone.",
-        location_title: "Location",
-        address: "Rafael E. Melgar Ave, Downtown, Cozumel, Q.R.",
-        footer_text: "The most authentic Italian restaurant in Cozumel."
+        location_title: "Our Location",
+        menu_title: "The Menu",
+        menu_subtitle: "Authentic Tuscan Cuisine",
+        cat_pasta: "Pasta Selection",
+        cat_pizza: "Gourmet Pizzas"
     }
 };
