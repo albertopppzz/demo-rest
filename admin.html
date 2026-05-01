@@ -2,90 +2,53 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Bella Notte</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Admin Bella Notte</title>
 </head>
-<body class="bg-stone-50 font-['Inter'] min-h-screen">
-    <nav class="bg-white border-b px-8 py-4 flex justify-between items-center shadow-sm">
-        <h1 class="font-serif italic text-2xl text-orange-600">Bella Notte Dashboard</h1>
-        <button onclick="logout()" class="text-xs font-bold text-red-600 uppercase">Cerrar Sesión</button>
-    </nav>
-
-    <main class="max-w-6xl mx-auto py-10 px-6">
-        <div class="flex justify-between items-end mb-8">
-            <div>
-                <h2 class="text-3xl font-serif italic text-stone-800">Libro de Reservas</h2>
-                <p class="text-stone-500 text-sm">Gestiona estados de mesas en tiempo real.</p>
-            </div>
-            <button onclick="clearAll()" class="text-[10px] bg-stone-200 px-3 py-1 rounded uppercase font-bold">Limpiar Todo</button>
+<body class="bg-stone-100 font-sans p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl font-serif italic text-orange-600">Panel de Reservas</h1>
+            <button onclick="sessionStorage.clear(); window.location.href='login.html'" class="text-red-600 font-bold uppercase text-xs">Salir</button>
         </div>
-
-        <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
             <table class="w-full text-left">
-                <thead class="bg-stone-50 text-stone-500 uppercase text-[10px] font-bold tracking-widest">
+                <thead class="bg-stone-50 border-b">
                     <tr>
-                        <th class="px-6 py-4">Cliente / Contacto</th>
-                        <th class="px-6 py-4">Fecha & Hora</th>
-                        <th class="px-6 py-4">Estado</th>
-                        <th class="px-6 py-4 text-right">Acciones</th>
+                        <th class="p-6">Cliente</th><th class="p-6">Fecha/Hora</th><th class="p-6">Estado</th><th class="p-6 text-right">Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="listaReservas" class="divide-y divide-stone-100"></tbody>
+                <tbody id="lista"></tbody>
             </table>
         </div>
-    </main>
-
+    </div>
     <script>
-        if (sessionStorage.getItem('isAdmin') !== 'true') window.location.href = 'login.html';
-
-        function loadReservas() {
-            const table = document.getElementById('listaReservas');
-            const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
-            
-            if (reservas.length === 0) {
-                table.innerHTML = `<tr><td colspan="4" class="py-20 text-center text-stone-400 italic">No hay reservas registradas.</td></tr>`;
-                return;
-            }
-
-            table.innerHTML = reservas.slice().reverse().map(res => {
-                let badge = "bg-yellow-100 text-yellow-700";
-                if(res.status === 'confirmada') badge = "bg-green-100 text-green-700";
-                if(res.status === 'cancelada') badge = "bg-red-100 text-red-700";
-
+        if(sessionStorage.getItem('isAdmin') !== 'true') window.location.href = 'login.html';
+        function load() {
+            const list = document.getElementById('lista');
+            const data = JSON.parse(localStorage.getItem('reservas')) || [];
+            list.innerHTML = data.slice().reverse().map(r => {
+                let color = r.status === 'confirmada' ? 'bg-green-100 text-green-700' : (r.status === 'cancelada' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700');
                 return `
-                <tr class="hover:bg-stone-50 transition">
-                    <td class="px-6 py-4">
-                        <div class="font-bold text-stone-900">${res.nombre}</div>
-                        <div class="text-[11px] text-stone-500">${res.email} | ${res.telefono}</div>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-stone-600">${res.fecha}<br><b>${res.hora}</b></td>
-                    <td class="px-6 py-4">
-                        <span class="${badge} px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter">${res.status}</span>
-                    </td>
-                    <td class="px-6 py-4 text-right space-x-1">
-                        <button onclick="updateStatus(${res.id}, 'confirmada')" class="bg-green-500 text-white p-2 rounded-lg text-[10px] font-bold">Confirmar</button>
-                        <button onclick="updateStatus(${res.id}, 'cancelada')" class="bg-red-500 text-white p-2 rounded-lg text-[10px] font-bold">Cancelar</button>
+                <tr class="border-b">
+                    <td class="p-6"><b>${r.nombre}</b><br><span class="text-xs text-stone-400">${r.email}</span></td>
+                    <td class="p-6">${r.fecha}<br>${r.hora}</td>
+                    <td class="p-6"><span class="${color} px-3 py-1 rounded-full text-[10px] font-bold uppercase">${r.status}</span></td>
+                    <td class="p-6 text-right">
+                        <button onclick="upd(${r.id}, 'confirmada')" class="text-green-600 mr-4">Confirmar</button>
+                        <button onclick="upd(${r.id}, 'cancelada')" class="text-red-600">Cancelar</button>
                     </td>
                 </tr>`;
             }).join('');
         }
-
-        function updateStatus(id, newStatus) {
-            let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
-            const idx = reservas.findIndex(r => r.id === id);
-            if (idx !== -1) {
-                reservas[idx].status = newStatus;
-                localStorage.setItem('reservas', JSON.stringify(reservas));
-                loadReservas();
-            }
+        function upd(id, s) {
+            let d = JSON.parse(localStorage.getItem('reservas'));
+            let i = d.findIndex(x => x.id === id);
+            d[i].status = s;
+            localStorage.setItem('reservas', JSON.stringify(d));
+            load();
         }
-
-        function logout() { sessionStorage.removeItem('isAdmin'); window.location.href = 'login.html'; }
-        function clearAll() { if(confirm('¿Borrar historial?')) { localStorage.removeItem('reservas'); loadReservas(); } }
-
-        document.addEventListener('DOMContentLoaded', loadReservas);
+        load();
     </script>
 </body>
 </html>
