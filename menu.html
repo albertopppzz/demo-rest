@@ -5,63 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú | Bella Notte</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-stone-50">
 
-    <nav class="w-full flex justify-between items-center px-16 py-6 text-black bg-white/80 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50">
-        <div class="text-2xl font-bold tracking-tighter font-serif italic">BELLA NOTTE</div>
-        <div class="space-x-8 font-medium">
-            <a href="index.html" class="hover:text-orange-600">Volver a Inicio</a>
+    <nav class="w-full flex justify-between items-center px-6 md:px-16 py-6 text-black bg-white/90 backdrop-blur-md border-b sticky top-0 z-50">
+        <div class="text-2xl font-bold font-serif italic tracking-tighter">BELLA NOTTE</div>
+        <div class="flex items-center space-x-6">
+            <a href="index.html" class="text-sm font-bold hover:text-orange-600 transition" data-i18n="nav_back">← Inicio</a>
+            <button id="lang-toggle" class="border border-stone-300 px-3 py-1 rounded text-xs font-bold uppercase">EN</button>
         </div>
     </nav>
 
-    <main class="py-20 px-6 max-w-4xl mx-auto">
+    <main class="py-20 px-6 max-w-4xl mx-auto min-h-screen">
         <header class="text-center mb-20" data-aos="fade-down">
-            <h1 class="text-6xl font-serif italic mb-4">Il Menu</h1>
-            <p class="text-stone-500 uppercase tracking-widest text-sm">Auténtica cocina Toscana</p>
+            <h1 class="text-6xl font-serif italic mb-4" data-i18n="menu_title">Il Menu</h1>
+            <p class="text-stone-500 uppercase tracking-widest text-sm" data-i18n="menu_subtitle"></p>
         </header>
 
-        <!-- Sección Pastas -->
         <div class="mb-20" data-aos="fade-up">
-            <h2 class="text-3xl font-serif italic border-b-2 border-orange-200 pb-2 mb-10 text-stone-800">Le Paste</h2>
+            <h2 class="text-3xl font-serif italic border-b-2 border-orange-200 pb-2 mb-10 text-stone-800" data-i18n="cat_pasta">Le Paste</h2>
             <div class="space-y-8">
                 <div class="flex justify-between items-end">
                     <div class="flex-1">
-                        <h3 class="text-xl font-bold text-stone-700 uppercase tracking-tight">Carbonara Tradizionale</h3>
-                        <p class="text-stone-500 italic text-sm">Guanciale, pecorino romano, yema de huevo y pimienta negra.</p>
+                        <h3 class="text-xl font-bold text-stone-700 uppercase tracking-tight" data-i18n="plate_1">Fettuccine al Pesto</h3>
+                        <p class="text-stone-500 italic text-sm" data-i18n="desc_1"></p>
                     </div>
                     <span class="text-xl font-serif text-orange-700 ml-4">$210</span>
                 </div>
-                <div class="flex justify-between items-end">
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-stone-700 uppercase tracking-tight">Gnocchi al Cuatro Formaggi</h3>
-                        <p class="text-stone-500 italic text-sm">Gorgonzola, fontina, parmigiano y taleggio.</p>
-                    </div>
-                    <span class="text-xl font-serif text-orange-700 ml-4">$195</span>
-                </div>
-                <!-- Añade más platos aquí -->
             </div>
         </div>
 
-        <!-- Sección Pizzas -->
         <div class="mb-20" data-aos="fade-up">
-            <h2 class="text-3xl font-serif italic border-b-2 border-orange-200 pb-2 mb-10 text-stone-800">Pizze Gourmet</h2>
+            <h2 class="text-3xl font-serif italic border-b-2 border-orange-200 pb-2 mb-10 text-stone-800" data-i18n="cat_pizza">Pizze Gourmet</h2>
             <div class="space-y-8">
                 <div class="flex justify-between items-end">
                     <div class="flex-1">
-                        <h3 class="text-xl font-bold text-stone-700 uppercase tracking-tight">Tartufo e Funghi</h3>
-                        <p class="text-stone-500 italic text-sm">Crema de trufa negra, champiñones, aceite de oliva y albahaca.</p>
+                        <h3 class="text-xl font-bold text-stone-700 uppercase tracking-tight" data-i18n="plate_2">Pizza Margherita</h3>
+                        <p class="text-stone-500 italic text-sm" data-i18n="desc_2"></p>
                     </div>
-                    <span class="text-xl font-serif text-orange-700 ml-4">$280</span>
+                    <span class="text-xl font-serif text-orange-700 ml-4">$245</span>
                 </div>
             </div>
         </div>
     </main>
 
+    <footer class="py-16 text-center bg-stone-900 text-white">
+        <p class="font-serif italic text-3xl mb-4">Bella Notte</p>
+        <div class="w-20 h-px bg-orange-600 mx-auto mb-6"></div>
+        <p class="text-stone-400 text-sm tracking-widest uppercase">Made With Love By Zelttzz ❤️</p>
+    </footer>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
+    <script src="translations.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
