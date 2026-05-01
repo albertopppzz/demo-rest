@@ -2,51 +2,89 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Admin Bella Notte</title>
+    <title>Admin Panel | Bella Notte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-stone-100 font-sans p-8">
-    <div class="max-w-6xl mx-auto">
-        <div class="flex justify-between items-center mb-10">
-            <h1 class="text-3xl font-serif italic text-orange-600">Panel de Reservas</h1>
-            <button onclick="sessionStorage.clear(); window.location.href='login.html'" class="text-red-600 font-bold uppercase text-xs">Salir</button>
+<body class="bg-stone-100 font-sans min-h-screen">
+    
+    <nav class="bg-stone-900 text-white p-4 md:px-10 flex justify-between items-center shadow-2xl">
+        <h1 class="font-serif italic text-xl text-orange-500">Bella Notte Admin</h1>
+        <button onclick="sessionStorage.clear(); window.location.href='login.html'" class="bg-red-600 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Salir</button>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-4 md:p-10">
+        <div class="mb-8">
+            <h2 class="text-3xl font-serif italic text-stone-800">Libro de Reservas</h2>
+            <p class="text-stone-500 text-xs">Gestiona tus clientes y confirma asistencias.</p>
         </div>
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <table class="w-full text-left">
-                <thead class="bg-stone-50 border-b">
-                    <tr>
-                        <th class="p-6">Cliente</th><th class="p-6">Fecha/Hora</th><th class="p-6">Estado</th><th class="p-6 text-right">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="lista"></tbody>
-            </table>
+
+        <!-- TABLA RESPONSIVA -->
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-stone-200">
+            <div class="overflow-x-auto"> <!-- Contenedor de scroll para móviles -->
+                <table class="w-full text-left min-w-[800px]">
+                    <thead class="bg-stone-50 border-b text-stone-400 uppercase text-[10px] font-bold tracking-widest">
+                        <tr>
+                            <th class="p-6">Cliente</th>
+                            <th class="p-6">Contacto</th>
+                            <th class="p-6">Fecha / Hora</th>
+                            <th class="p-6 text-center">Estado</th>
+                            <th class="p-6 text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista" class="divide-y divide-stone-100 text-sm">
+                        <!-- Las reservas se cargan aquí -->
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </main>
+
     <script>
         if(sessionStorage.getItem('isAdmin') !== 'true') window.location.href = 'login.html';
+
         function load() {
             const list = document.getElementById('lista');
             const data = JSON.parse(localStorage.getItem('reservas')) || [];
+            
+            if(data.length === 0) {
+                list.innerHTML = `<tr><td colspan="5" class="p-20 text-center text-stone-400 italic font-serif text-xl">Aún no hay reservas...</td></tr>`;
+                return;
+            }
+
             list.innerHTML = data.slice().reverse().map(r => {
-                let color = r.status === 'confirmada' ? 'bg-green-100 text-green-700' : (r.status === 'cancelada' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700');
+                let badge = "bg-yellow-100 text-yellow-700";
+                if(r.status === 'confirmada') badge = "bg-green-100 text-green-700";
+                if(r.status === 'cancelada') badge = "bg-red-100 text-red-700";
+
                 return `
-                <tr class="border-b">
-                    <td class="p-6"><b>${r.nombre}</b><br><span class="text-xs text-stone-400">${r.email}</span></td>
-                    <td class="p-6">${r.fecha}<br>${r.hora}</td>
-                    <td class="p-6"><span class="${color} px-3 py-1 rounded-full text-[10px] font-bold uppercase">${r.status}</span></td>
-                    <td class="p-6 text-right">
-                        <button onclick="upd(${r.id}, 'confirmada')" class="text-green-600 mr-4">Confirmar</button>
-                        <button onclick="upd(${r.id}, 'cancelada')" class="text-red-600">Cancelar</button>
+                <tr class="hover:bg-stone-50 transition">
+                    <td class="p-6 font-bold text-stone-800">${r.nombre}</td>
+                    <td class="p-6">
+                        <div class="text-stone-500 text-xs">${r.email}</div>
+                        <div class="text-orange-600 font-medium text-xs">${r.telefono}</div>
+                    </td>
+                    <td class="p-6 text-stone-600">${r.fecha}<br><span class="font-bold">${r.hora}</span></td>
+                    <td class="p-6 text-center">
+                        <span class="${badge} px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">${r.status}</span>
+                    </td>
+                    <td class="p-6 text-right space-x-2">
+                        <button onclick="upd(${r.id}, 'confirmada')" class="text-green-600 text-xs font-bold hover:underline">Confirmar</button>
+                        <button onclick="upd(${r.id}, 'cancelada')" class="text-red-600 text-xs font-bold hover:underline">Cancelar</button>
                     </td>
                 </tr>`;
             }).join('');
         }
+
         function upd(id, s) {
             let d = JSON.parse(localStorage.getItem('reservas'));
             let i = d.findIndex(x => x.id === id);
-            d[i].status = s;
-            localStorage.setItem('reservas', JSON.stringify(d));
-            load();
+            if(i !== -1) {
+                d[i].status = s;
+                localStorage.setItem('reservas', JSON.stringify(d));
+                load();
+            }
         }
         load();
     </script>
