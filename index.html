@@ -17,7 +17,7 @@
         <div class="flex items-center space-x-4 md:space-x-8">
             <a href="menu.html" class="hover:text-orange-400 transition font-medium" data-i18n="nav_menu">Menú</a>
             <button id="lang-toggle" class="bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">EN</button>
-            <a href="#ubicacion" class="bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-orange-700 transition" data-i18n="nav_location">Ubicación</a>
+            <a href="#reservar" class="bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-orange-700 transition" data-i18n="nav_reserve">Reservar</a>
         </div>
     </nav>
 
@@ -35,40 +35,68 @@
         <h2 class="text-5xl font-serif text-center mb-16 italic" data-i18n="spec_title">Especialidades</h2>
         <div class="grid md:grid-cols-3 gap-12">
             <div data-aos="fade-up">
-                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=1994&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=1994&auto=format&fit=crop" class="w-full h-full object-cover"></div>
                 <h3 class="text-2xl font-serif italic" data-i18n="plate_1">Fettuccine al Pesto</h3>
                 <p class="text-stone-500 mt-2" data-i18n="desc_1"></p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
-                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1574071318508-1cdbad80ad50?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1574071318508-1cdbad80ad50?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"></div>
                 <h3 class="text-2xl font-serif italic" data-i18n="plate_2">Pizza Margherita</h3>
                 <p class="text-stone-500 mt-2" data-i18n="desc_2"></p>
             </div>
             <div data-aos="fade-up" data-aos-delay="400">
-                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1571775661030-9836882aa791?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+                <div class="h-80 overflow-hidden rounded-2xl shadow-lg mb-6"><img src="https://images.unsplash.com/photo-1571775661030-9836882aa791?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"></div>
                 <h3 class="text-2xl font-serif italic" data-i18n="plate_3">Tiramisú Real</h3>
                 <p class="text-stone-500 mt-2" data-i18n="desc_3"></p>
             </div>
         </div>
     </section>
 
+    <section id="reservar" class="py-24 bg-stone-900 text-white">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-5xl font-serif mb-6 italic" data-i18n="reserva_title">Reserva tu Mesa</h2>
+                <p class="text-stone-400 mb-8 leading-relaxed" data-i18n="reserva_subtitle"></p>
+                <div class="flex space-x-4 mb-8">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">TA</a>
+                </div>
+            </div>
+            <form id="reservaForm" class="bg-white p-8 rounded-3xl text-black shadow-2xl" data-aos="fade-left">
+                <div class="space-y-4">
+                    <input type="text" id="nombre" data-i18n="form_name" placeholder="Tu Nombre" required class="w-full p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="date" id="fecha" required class="p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                        <input type="time" id="hora" required class="p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                    </div>
+                    <button type="submit" class="w-full bg-stone-900 text-white py-4 rounded-xl font-bold hover:bg-orange-600 transition" data-i18n="form_btn">Confirmar Reserva</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
     <section id="ubicacion" class="py-24 bg-stone-100 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
+            <div>
                 <h2 class="text-4xl font-serif mb-6 italic" data-i18n="location_title">Ubicación</h2>
-                <p class="text-xl mb-4 text-stone-700 font-medium" data-i18n="address">Av. Rafael E. Melgar, Centro, Cozumel, Q.R.</p>
+                <p class="text-xl mb-4 text-stone-700 font-medium" data-i18n="address"></p>
                 <p class="text-orange-600 font-bold tracking-widest uppercase text-sm">Cozumel, México</p>
             </div>
-            <div class="h-96 rounded-3xl overflow-hidden shadow-2xl" data-aos="fade-left">
+            <div class="h-96 rounded-3xl overflow-hidden shadow-2xl">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14936.56811211158!2d-86.9585641!3d20.5106411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e59cf05d5353d%3A0xc3b8344e26f582!2sAv.%20Rafael%20E.%20Melgar%2C%20Cozumel%2C%20Q.R.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 text-center bg-stone-900 text-white">
+    <footer class="py-16 text-center bg-stone-950 text-white">
         <p class="font-serif italic text-3xl mb-4">Bella Notte</p>
-        <div class="w-20 h-px bg-orange-600 mx-auto mb-6"></div>
-        <p class="text-stone-400 text-sm tracking-widest uppercase">Made With Love By Zelttzz ❤️</p>
+        <div class="flex justify-center space-x-6 mb-8">
+            <a href="#" class="text-stone-400 hover:text-orange-600 transition">Facebook</a>
+            <a href="#" class="text-stone-400 hover:text-orange-600 transition">Instagram</a>
+            <a href="#" class="text-stone-400 hover:text-orange-600 transition">TripAdvisor</a>
+        </div>
+        <p class="text-stone-500 text-xs tracking-widest uppercase">Made With Love By Zelttzz ❤️</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
