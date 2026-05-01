@@ -1,31 +1,26 @@
-// 1. Inicializar AOS (Animaciones)
-if (typeof AOS !== 'undefined') {
-    AOS.init({ duration: 1000, once: true });
-}
+// Inicializar Animaciones
+AOS.init({ duration: 1000, once: true });
 
-// 2. Lógica de Idioma
-// Detectamos el idioma guardado o el del navegador
+// Lógica de Idioma
 let currentLang = localStorage.getItem('language') || 
                   (navigator.language.startsWith('en') ? 'en' : 'es');
 
 function updateTexts() {
-    // Buscamos todos los elementos con el atributo data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18n[currentLang] && i18n[currentLang][key]) {
-            el.innerText = i18n[currentLang][key];
+            if (el.tagName === 'INPUT') {
+                el.placeholder = i18n[currentLang][key];
+            } else {
+                el.innerText = i18n[currentLang][key];
+            }
         }
     });
-
-    // Actualizamos el texto del botón (si estamos en ES, el botón ofrece cambiar a EN)
     const langBtn = document.getElementById('lang-toggle');
-    if (langBtn) {
-        langBtn.innerText = currentLang === 'es' ? 'EN' : 'ES';
-    }
+    if (langBtn) langBtn.innerText = currentLang === 'es' ? 'EN' : 'ES';
 }
 
-// 3. Evento Click para el Botón de Idioma
-// Usamos delegación de eventos para que siempre funcione
+// Escuchar clicks (Botón idioma y Formulario)
 document.addEventListener('click', (e) => {
     if (e.target && e.target.id === 'lang-toggle') {
         currentLang = currentLang === 'es' ? 'en' : 'es';
@@ -34,7 +29,17 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// 4. Navbar Scroll Effect (Solo para el Index que tiene Hero)
+document.addEventListener('submit', (e) => {
+    if (e.target && e.target.id === 'reservaForm') {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const msg = currentLang === 'es' ? `¡Grazie, ${nombre}! Reserva recibida.` : `Thanks, ${nombre}! Reservation received.`;
+        alert(msg);
+        e.target.reset();
+    }
+});
+
+// Navbar Scroll Effect
 window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (nav) {
@@ -48,7 +53,4 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 5. Ejecutar al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    updateTexts();
-});
+document.addEventListener('DOMContentLoaded', updateTexts);
