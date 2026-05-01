@@ -3,81 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bella Notte - Auténtica Cocina Italiana</title>
+    <title>Bella Notte | Ristorante Italiano</title>
+    <!-- Tailwind & Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-stone-50">
+<body class="bg-stone-50 overflow-x-hidden">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 flex justify-between items-center px-10 py-6 text-white bg-black/20 backdrop-blur-md">
-        <div class="text-2xl font-bold tracking-tighter">BELLA NOTTE</div>
-        <div class="space-x-8 font-medium">
-            <a href="#" class="hover:text-orange-400">Inicio</a>
-            <a href="menu.html" class="hover:text-orange-400">Menú</a>
-            <a href="#reservar" class="bg-orange-600 px-5 py-2 rounded-full">Reservar Mesa</a>
+    <nav class="fixed w-full z-50 flex justify-between items-center px-6 md:px-16 py-6 transition-all duration-300 text-white" id="navbar">
+        <div class="text-2xl font-bold tracking-tighter font-serif italic">BELLA NOTTE</div>
+        <div class="hidden md:flex space-x-8 font-medium items-center">
+            <a href="index.html" class="hover:text-orange-400 transition">Inicio</a>
+            <a href="menu.html" class="hover:text-orange-400 transition">Menú</a>
+            <a href="#reservar" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition">Reservar</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative h-screen flex items-center justify-center">
-        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black/40"></div>
-        <div class="relative text-center text-white space-y-6">
-            <h1 class="text-7xl md:text-9xl">Pasta Fatta a Mano</h1>
-            <p class="text-xl max-w-xl mx-auto">Desde el corazón de Italia hasta tu mesa. Ingredientes frescos, recetas de la nonna.</p>
-            <a href="menu.html" class="inline-block border-2 border-white px-10 py-3 rounded-full hover:bg-white hover:text-black transition font-bold">Ver Menú Completo</a>
+    <!-- Hero -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative text-center text-white px-4" data-aos="zoom-out" data-aos-duration="1500">
+            <span class="uppercase tracking-[0.3em] text-sm mb-4 block text-orange-400 font-semibold">Tradizione Italiana</span>
+            <h1 class="text-6xl md:text-9xl font-serif mb-6 italic">Sapore Vero</h1>
+            <div class="flex gap-4 justify-center mt-10">
+                <a href="menu.html" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-orange-600 hover:text-white transition">Explorar Menú</a>
+            </div>
         </div>
     </header>
 
-    <!-- Preview del Menú (3 platos estrella) -->
-    <section class="py-24 px-10 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-5xl text-stone-800">Especialidades del Chef</h2>
-            <div class="w-24 h-1 bg-orange-600 mx-auto mt-4"></div>
+    <!-- Preview Menu -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-5xl font-serif text-stone-800 italic">Especialidades del Chef</h2>
+            <p class="text-stone-500 mt-4">Platillos seleccionados con amor y tradición.</p>
         </div>
-        <div class="grid md:grid-cols-3 gap-12">
-            <!-- Plato 1 -->
-            <div class="group">
-                <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=1974&auto=format&fit=crop" class="rounded-2xl h-80 w-full object-cover shadow-lg group-hover:scale-105 transition">
-                <h3 class="mt-6 text-2xl">Lasagna Clásica</h3>
-                <p class="text-stone-500">Bolognesa de 8 horas, mozzarella fresca y albahaca.</p>
-                <span class="text-orange-600 font-bold block mt-2">$18.00</span>
-            </div>
-            <!-- Plato 2 (puedes añadir más) -->
-        </div>
-    </section>
-
-    <!-- Sección Reservas -->
-    <section id="reservar" class="py-24 bg-stone-900 text-white">
-        <div class="max-w-4xl mx-auto px-10">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-5xl mb-6">Reserva tu mesa</h2>
-                    <p class="text-stone-400">Asegura tu lugar para una velada inolvidable. Para grupos de más de 8 personas, llámanos directamente.</p>
+        
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="group" data-aos="fade-up" data-aos-delay="100">
+                <div class="overflow-hidden rounded-2xl h-80 shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 </div>
-                <form id="reservaForm" class="space-y-4">
-                    <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-4 bg-stone-800 border border-stone-700 rounded-lg outline-none focus:border-orange-600">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="date" id="fecha" class="p-4 bg-stone-800 border border-stone-700 rounded-lg outline-none text-white">
-                        <input type="time" id="hora" class="p-4 bg-stone-800 border border-stone-700 rounded-lg outline-none text-white">
-                    </div>
-                    <button type="submit" class="w-full bg-orange-600 py-4 rounded-lg font-bold hover:bg-orange-700 transition">Confirmar Reserva</button>
-                </form>
+                <h3 class="text-2xl mt-6 font-serif italic">Fettuccine al Pesto</h3>
+                <p class="text-stone-500 text-sm mt-2">Albahaca fresca de nuestro huerto, piñones y Parmigiano Reggiano.</p>
+            </div>
+
+            <div class="group" data-aos="fade-up" data-aos-delay="300">
+                <div class="overflow-hidden rounded-2xl h-80 shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbad80ad50?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                </div>
+                <h3 class="text-2xl mt-6 font-serif italic">Pizza Margherita</h3>
+                <p class="text-stone-500 text-sm mt-2">Masa madre madurada 48 horas, pomodoro San Marzano y mozzarella di bufala.</p>
+            </div>
+
+            <div class="group" data-aos="fade-up" data-aos-delay="500">
+                <div class="overflow-hidden rounded-2xl h-80 shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1571775661030-9836882aa791?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                </div>
+                <h3 class="text-2xl mt-6 font-serif italic">Tiramisú della Nonna</h3>
+                <p class="text-stone-500 text-sm mt-2">Mascarpone cremoso, café espresso y cacao puro.</p>
             </div>
         </div>
     </section>
 
-    <script>
-        document.getElementById('reservaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            alert(`¡Grazie, ${nombre}! Tu reserva ha sido recibida (Simulación). Te esperamos.`);
-        });
-    </script>
+    <!-- Reserva Section -->
+    <section id="reservar" class="py-24 bg-stone-900 text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-5xl font-serif mb-6 italic">Una mesa para dos...</h2>
+                <p class="text-stone-400 mb-8 leading-relaxed">Vive la experiencia italiana completa. Ambiente íntimo, música suave y la mejor cava de vinos de la ciudad.</p>
+                <div class="text-orange-400 font-bold text-xl uppercase tracking-widest italic">Aperitivo de bienvenida gratis al reservar online.</div>
+            </div>
+            <form id="reservaForm" class="bg-white p-8 rounded-3xl text-black shadow-2xl" data-aos="fade-left">
+                <div class="space-y-4">
+                    <input type="text" id="nombre" placeholder="Tu nombre" required class="w-full p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="date" id="fecha" required class="p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                        <input type="time" id="hora" required class="p-4 bg-stone-100 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 transition">
+                    </div>
+                    <button type="submit" class="w-full bg-stone-900 text-white py-4 rounded-xl font-bold hover:bg-orange-600 transition-colors duration-300">Solicitar Reserva</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-stone-50 py-12 text-center text-stone-400 border-t border-stone-200">
+        <p class="font-serif italic text-stone-800 text-xl mb-4">Bella Notte</p>
+        <p class="text-sm">&copy; 2026 Made Whit Love By Zelttzz ❤️ </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
