@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Reservas | Bella Notte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-stone-50 font-['Inter'] min-h-screen">
+    <nav class="bg-white border-b border-stone-200 px-8 py-4 flex justify-between items-center">
+        <h1 class="font-serif italic text-2xl italic text-stone-800">Bella Notte Dashboard</h1>
+        <button onclick="logout()" class="text-sm font-bold text-red-600 uppercase tracking-widest">Cerrar Sesión</button>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-12 px-6">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-serif italic text-stone-800">Gestión de Reservas</h2>
+            <button onclick="clearReservas()" class="text-xs bg-stone-200 px-4 py-2 rounded-full hover:bg-stone-300 transition">Limpiar Historial</button>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-stone-100 text-stone-600 uppercase text-xs font-bold">
+                    <tr>
+                        <th class="px-6 py-4 border-b">Cliente</th>
+                        <th class="px-6 py-4 border-b">Fecha</th>
+                        <th class="px-6 py-4 border-b">Hora</th>
+                        <th class="px-6 py-4 border-b">Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="listaReservas">
+                    <!-- Aquí se cargarán las reservas -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Protección de ruta
+        if(sessionStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        function loadReservas() {
+            const table = document.getElementById('listaReservas');
+            const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+            
+            if (reservas.length === 0) {
+                table.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-stone-400 italic">No hay reservas registradas aún.</td></tr>`;
+                return;
+            }
+
+            table.innerHTML = reservas.map(res => `
+                <tr class="hover:bg-stone-50 transition border-b border-stone-100 text-stone-700">
+                    <td class="px-6 py-4 font-bold">${res.nombre}</td>
+                    <td class="px-6 py-4">${res.fecha}</td>
+                    <td class="px-6 py-4">${res.hora}</td>
+                    <td class="px-6 py-4">
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Confirmada</span>
+                    </td>
+                </tr>
+            `).reverse().join('');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isAdmin');
+            window.location.href = 'login.html';
+        }
+
+        function clearReservas() {
+            if(confirm('¿Estás seguro de borrar todas las reservas?')) {
+                localStorage.removeItem('reservas');
+                loadReservas();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadReservas);
+    </script>
+</body>
+</html>
