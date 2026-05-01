@@ -1,33 +1,102 @@
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-.font-serif { font-family: 'Playfair Display', serif; }
-nav { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+/* --- CONFIGURACIÓN BASE --- */
+html {
+    scroll-behavior: smooth;
+}
 
-/* Botones de Redes Sociales */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* --- NAVBAR DINÁMICO --- */
+#navbar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto cuando el navbar es blanco al hacer scroll */
+.bg-white {
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* --- BOTONES DE REDES SOCIALES --- */
 .social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 45px;
     height: 45px;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 700;
     color: white;
     transition: all 0.3s ease;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .social-icon:hover {
-    background: #ea580c;
+    background: #ea580c; /* Naranja fuerte */
     border-color: #ea580c;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.3);
 }
 
-/* Efecto hover imágenes */
-img { transition: transform 0.6s ease; }
-.grid div:hover img { transform: scale(1.05); }
+/* --- ESTILOS PARA LAS IMÁGENES --- */
+.img-zoom-container {
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
 
-/* Scrollbar Personalizada */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: #ea580c; border-radius: 10px; }
+.img-zoom-container img {
+    transition: transform 0.7s ease;
+}
+
+.img-zoom-container:hover img {
+    transform: scale(1.1);
+}
+
+/* --- SCROLLBAR PERSONALIZADA --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ea580c;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c2410c;
+}
+
+/* --- AJUSTES PARA EL PANEL DE ADMIN --- */
+/* Badge de estados en el admin */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- ANIMACIONES EXTRA --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-custom {
+    animation: fadeIn 0.8s ease forwards;
+}
